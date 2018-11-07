@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="jumbotron">
+        <h1>List of movies:</h1>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for key, value in movies.items() %}
+        <tr>
+          <td>{{ value[1] }}</td>
+          <td>{{ value[2] }}</td>
+          <td>[rate]</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+{% endblock %}

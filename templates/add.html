@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Add new movie to database!</h1>
+    <form method="POST">
+        <div class="row">
+            {{form.hidden_tag()}}
+            {{form.title.label}}{{form.title(class='form-control', placeholder='Wpisz tytuł...')}}
+        </div>
+
+        <div class="row"><div class="dropdown-divider"></div></div>
+        {{form.submit(class='btn btn-primary mb-2')}}
+    </form>
+</div>
+{% endblock %}
