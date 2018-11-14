@@ -5,7 +5,12 @@
     <form method="POST">
         <div class="row">
             {{form.hidden_tag()}}
-            {{form.title.label}}{{form.title(class='form-control', placeholder='Wpisz tytuł...')}}
+            <div class="col">
+                {{form.title.label}}{{form.title(class='form-control', placeholder='Title...')}}
+            </div>
+            <div class="col">
+                {{form.premiere.label}}{{form.premiere(class='form-control')}}
+            </div>
         </div>
 
         <div class="row"><div class="dropdown-divider"></div></div>
