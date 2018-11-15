@@ -17,7 +17,14 @@
           <td>{{ value[1] }}</td>
           <td>{{ value[2] }}</td>
           <td>{{ value[3] }}</td>
-          <td>[rate]</td>
+          <td>
+              {% for i in range(value[4]) %}
+                <img src="/static/star-yellow-small.png">
+              {% endfor %}
+              {% for i in range(5-value[4]) %}
+                <img src="/static/star-black-small.png">
+              {% endfor %}
+          </td>
         </tr>
         {% endfor %}
         </tbody>

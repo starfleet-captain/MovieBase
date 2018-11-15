@@ -31,10 +31,12 @@ class Movie(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     title = database.Column(database.Text)
     premiere = database.Column(database.DateTime)
+    rate = database.Column(database.Integer)
 
-    def __init__(self, title, premiere):
+    def __init__(self, title, premiere, rate):
         self.title = title
         self.premiere = premiere
+        self.rate = rate
 
     def __repr__(self):
         return f"{self.title}"
@@ -80,12 +82,10 @@ def del_movie():
 
     if form.validate_on_submit():
         movie_id = request.form.get('delete')
-        #id = form.id.data
-        #movie = Movie.query.get(id)
+        movie = Movie.query.get(movie_id)
 
-        #database.session.delete(movie)
-        #database.session.commit()
-        print(movie_id)
+        database.session.delete(movie)
+        database.session.commit()
         return redirect(url_for('list_movies'))
 
     return render_template('delete.html', form=form, movies=movie_list)
@@ -97,7 +97,8 @@ def get_movies():
     movie_list = {}
 
     for movie in all_movies:
-        movie_list[number_of_movies] = (movie.id, number_of_movies, movie.title, movie.premiere.strftime("%Y-%m-%d"))
+        movie_list[number_of_movies] = (movie.id, number_of_movies, movie.title, movie.premiere.strftime("%Y-%m-%d"),
+                                        movie.rate)
         number_of_movies += 1
 
     return movie_list
