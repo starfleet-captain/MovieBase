@@ -53,13 +53,14 @@ def index():
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_movie():
-    form = AddForm()
+    form = AddForm(request.form)
 
     if form.validate_on_submit():
         title = form.title.data
         premiere = form.premiere.data
+        rate = int(form.rate.data)
 
-        new_movie = Movie(title, premiere)
+        new_movie = Movie(title, premiere, rate)
 
         database.session.add(new_movie)
         database.session.commit()

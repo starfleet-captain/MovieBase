@@ -2,7 +2,7 @@
 {% block content %}
 <div class="jumbotron">
     <h1>Add new movie to database!</h1>
-    <form method="POST">
+    <form action="" method="POST">
         <div class="row">
             {{form.hidden_tag()}}
             <div class="col">
@@ -15,7 +15,6 @@
                 {{form.rate.label}}{{form.rate(class='form-control')}}
             </div>
         </div>
-
         <div class="row"><div class="dropdown-divider"></div></div>
         {{form.submit(class='btn btn-primary mb-2')}}
     </form>
