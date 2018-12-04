@@ -1,9 +1,11 @@
 import os, datetime
-from forms import AddForm, DelForm
+from forms import AddForm, DelForm, SearchForm
 from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
+# TODO: incoming premieres (includes rebuilding menu)
+# TODO: notifications about premieres
 
 ##############################
 #### SQL DATABASE SECTION ####
@@ -92,8 +94,24 @@ def del_movie():
     return render_template('delete.html', form=form, movies=movie_list)
 
 
-def get_movies():
-    all_movies = Movie.query.all()
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    form = SearchForm()
+
+    if form.validate_on_submit():
+        title = form.searchfield.data
+        movie_list = get_movies(title=title)
+        return render_template('list.html', movies=movie_list)
+
+    return render_template('find.html', form=form)
+
+
+def get_movies(title=None):
+    if title is None:
+        all_movies = Movie.query.all()
+    else:
+        all_movies = Movie.query.filter(Movie.title.like('%' + title + '%'))
+
     number_of_movies = 0
     movie_list = {}
 
